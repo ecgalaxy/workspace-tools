@@ -1,0 +1,6 @@
+---
+- ecgalaxy.aws_cli
+- ecgalaxy.bootstrap
+- ecgalaxy.ca_certificates
+- ecgalaxy.common_packages
+- ecgalaxy.task

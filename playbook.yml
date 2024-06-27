@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - ecgalaxy.bootstrap
+    - ecgalaxy.common_packages
+    - ecgalaxy.ca_certificates
+    - ecgalaxy.aws_cli
+    - ecgalaxy.task
