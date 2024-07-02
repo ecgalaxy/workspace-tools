@@ -1,8 +1,40 @@
 ---
 - hosts: all
+  tasks:
+    - name: Set ansible_end_user
+      block:
+        - name: Get default end user
+          ansible.builtin.command: "id -u -n 1000"
+          register: end_user
+          changed_when: false
+        - name: Set ansible_end_user variable if empty
+          ansible.builtin.set_fact:
+            ansible_end_user: "{{ end_user.stdout }}"
+          when: ansible_end_user is undefined
+      rescue:
+        - name: Print message
+          ansible.builtin.debug:
+            msg: 'ansible_end_user variable is undefined'
+
+- hosts: all
   roles:
     - ecgalaxy.bootstrap
     - ecgalaxy.common_packages
-    - ecgalaxy.ca_certificates
     - ecgalaxy.aws_cli
+    - ecgalaxy.ca_certificates
+    - ecgalaxy.containers_toolbox
+    - ecgalaxy.java_openjdk
+    - ecgalaxy.maven
+    - ecgalaxy.nodejs
+    - ecgalaxy.oracle_instantclient
+    - ecgalaxy.php
     - ecgalaxy.task
+    - ecgalaxy.terraform
+
+- hosts: all
+  roles:
+    - role: ecgalaxy.docker
+      when: ansible_end_user is defined
+  vars:
+    docker_users:
+      - "{{ ansible_end_user }}"

@@ -1,0 +1,13 @@
+stages:
+  - test
+
+test playbook:
+  stage: test
+  tags:
+    - ecgalaxy-docker
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:jammy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - apt-get update && apt-get install -y python3-venv
+    - ./exec.sh

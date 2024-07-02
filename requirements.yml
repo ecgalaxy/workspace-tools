@@ -3,4 +3,12 @@
 - ecgalaxy.bootstrap
 - ecgalaxy.ca_certificates
 - ecgalaxy.common_packages
+- ecgalaxy.containers_toolbox
+- ecgalaxy.docker
+- ecgalaxy.java_openjdk
+- ecgalaxy.maven
+- ecgalaxy.nodejs
+- ecgalaxy.oracle_instantclient
+- ecgalaxy.php
 - ecgalaxy.task
+- ecgalaxy.terraform
