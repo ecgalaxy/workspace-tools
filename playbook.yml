@@ -1,20 +1,20 @@
 ---
 - hosts: all
   tasks:
-    - name: Set ansible_end_user
+    - name: Set ansible_end_user if undefined
       block:
         - name: Get default end user
           ansible.builtin.command: "id -u -n 1000"
           register: end_user
           changed_when: false
-        - name: Set ansible_end_user variable if empty
+        - name: Set ansible_end_user variable
           ansible.builtin.set_fact:
             ansible_end_user: "{{ end_user.stdout }}"
-          when: ansible_end_user is undefined
       rescue:
         - name: Print message
           ansible.builtin.debug:
             msg: 'ansible_end_user variable is undefined'
+      when: ansible_end_user is undefined
 
 - hosts: all
   roles:
@@ -30,6 +30,11 @@
     - ecgalaxy.php
     - ecgalaxy.task
     - ecgalaxy.terraform
+
+- hosts: all
+  roles:
+    - role: ecgalaxy.docker
+      when: ansible_end_user is undefined
 
 - hosts: all
   roles:
