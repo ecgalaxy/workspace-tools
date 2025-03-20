@@ -1,5 +1,9 @@
 # Releases
 
+## 0.5.x
+
+- Install GUI applications when a desktop environment is available.
+
 ## 0.4.x
 
 - Added method to detect Active Directory end-user, if any.

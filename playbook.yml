@@ -16,6 +16,17 @@
             msg: 'ansible_end_user variable is undefined'
       when: ansible_end_user is undefined
 
+    - name: Set install_gui_apps if undefined
+      block:
+        - name: Check if a desktop environment is available
+          ansible.builtin.stat:
+            path: "/usr/share/xsessions"
+          register: xsessions
+        - name: Set install_gui_apps variable
+          ansible.builtin.set_fact:
+            install_gui_apps: "{% if (xsessions.stat.exists) %}True{% else %}False{% endif %}"
+      when: install_gui_apps is undefined
+
 - hosts: all
   roles:
     - ecgalaxy.bootstrap
@@ -43,3 +54,10 @@
   vars:
     docker_users:
       - "{{ ansible_end_user }}"
+
+- hosts: all
+  roles:
+    - role: ecgalaxy.intellij
+      when: install_gui_apps
+    - role: ecgalaxy.vscode
+      when: install_gui_apps

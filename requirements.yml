@@ -5,6 +5,7 @@
 - ecgalaxy.common_packages
 - ecgalaxy.containers_toolbox
 - ecgalaxy.docker
+- ecgalaxy.intellij
 - ecgalaxy.java_openjdk
 - ecgalaxy.maven
 - ecgalaxy.nodejs
@@ -12,3 +13,4 @@
 - ecgalaxy.php
 - ecgalaxy.task
 - ecgalaxy.terraform
+- ecgalaxy.vscode
