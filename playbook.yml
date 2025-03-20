@@ -4,7 +4,7 @@
     - name: Set ansible_end_user if undefined
       block:
         - name: Get default end user
-          ansible.builtin.command: "id -u -n 1000"
+          ansible.builtin.shell: "realm list | grep -q kerberos && echo $(ls -al /home/ | grep -m1 'domain users' | cut -d ' ' -f3) || id -u -n 1000"
           register: end_user
           changed_when: false
         - name: Set ansible_end_user variable
