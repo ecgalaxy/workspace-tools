@@ -35,6 +35,41 @@ Please check the above links for specific details.
 sudo ./exec.sh
 ```
 
+## Customising
+
+The `exec.sh` script creates a Python virtual environment in the `venv` subfolder, installs Ansible within it,
+downloads Ansible roles listed in the `requirements.yml` file, then locally executes the Ansible playbook in `playbook.yml`.
+
+You can customise the above files according to your needs, e.g. removing Ansible roles from the playbook
+and setting custom variables.
+
+The example below will install OpenJDK 17, Maven and Node.js 23:
+
+```
+- hosts: all
+  roles:
+    - ecgalaxy.bootstrap
+    - ecgalaxy.common_packages
+    - ecgalaxy.java_openjdk
+    - ecgalaxy.maven
+    - ecgalaxy.nodejs
+  vars:
+    java_version: "17"
+    nodejs_version: "23.x"
+```
+
+You will usually find the customisable role variables in each Ansible role README;
+see links in the Features section above for specific details.
+
+## Upgrading
+
+When a supported package is available, ECGALAXY Ansible roles use the Linux distribution's package manager to install software.
+In order to upgrade or uninstall a package, please refer to your distribution's package manager documentation.
+
+Otherwise, ECGALAXY Ansible roles usually save software files in `/opt`, within a specific subfolder, and symlinks in `/usr/local/bin`
+for executable binaries. In such case, you can upgrade the installed software by re-executing the playbook, when a new version of
+the related Ansible role has been released.
+
 ## License
 
 Copyright the European Union 2024.
