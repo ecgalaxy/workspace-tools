@@ -58,6 +58,6 @@
 - hosts: all
   roles:
     - role: ecgalaxy.intellij
-      when: install_gui_apps
+      when: install_gui_apps | bool
     - role: ecgalaxy.vscode
-      when: install_gui_apps
+      when: install_gui_apps | bool
